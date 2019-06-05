@@ -9,7 +9,12 @@ public class stairs {
 //		mem[2] = 2;
 //		System.out.println(stair(7,mem));
 		int[] arr = { 0, 2, 3, 1, 0, 2, 0, 2, 4 };
-		System.out.println(minSteps(arr));
+//		System.out.println(minSteps(arr));
+		int[][] cost = { { 2, 6, 5, 1, 3, 4 }, { 0, 4, 9, 2, 9, 0 }, { 4, 8, 1, 0, 6, 5 }, { 0, 3, 3, 1, 5, 4 },
+				{ 1, 2, 7, 0, 6, 9 }, { 5, 7, 1, 3, 8, 2 }
+
+		};
+		System.out.println(mazeCost(cost));
 	}
 //	static String[] memAs = new String[9];
 
@@ -73,18 +78,36 @@ public class stairs {
 				int i = s - js;
 				if (i >= 0) {
 					if (tab[i] != Integer.MAX_VALUE) {
-						tab[s] = Math.min(tab[i],tab[s]);
+						tab[s] = Math.min(tab[i], tab[s]);
 					}
 				}
 			}
-			if(jump[s]!=0)
-			tab[s]++;
+			if (jump[s] != 0)
+				tab[s]++;
 		}
 		return tab[tab.length - 1];
 	}
-//	public static int mazeCost(int[][] arr,int row,int col)
-//	{
-//		int[][] tab = new int[arr.length][arr.length];
-//		
-//	}
+
+	public static int mazeCost(int[][] arr) {
+		int[][] tab = new int[arr.length][arr.length];
+//		tab[arr.length - 1][arr.length - 1] = arr[arr.length - 1][arr.length - 1];
+		for (int i = arr.length - 1; i >= 0; i--) {
+			for (int j = arr[0].length - 1; j >= 0; j--) {
+				if(i == arr.length - 1 && j == arr[0].length - 1) {
+					tab[i][j] = arr[i][j];
+				}
+				else if (i == arr.length - 1) {
+//					System.out.println(i + "," + j);
+					tab[i][j] = tab[i][j + 1] + arr[i][j];
+
+				} else if (j == arr.length - 1) {
+					tab[i][j] = tab[i + 1][j] + arr[i][j];
+
+				} else {
+					tab[i][j] = Math.min(tab[i + 1][j], tab[i][j + 1]) + arr[i][j];
+				}
+			}
+		}
+		return tab[0][0];
+	}
 }
