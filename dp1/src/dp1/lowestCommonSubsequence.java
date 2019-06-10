@@ -28,11 +28,13 @@ public class lowestCommonSubsequence {
 		return strg[strg.length-1][strg[0].length-1];
 	}
 	
-	public static void path(String s1,String s2,int[][] strg,int i,int j,String psf) {
-		
-		if(s1.charAt(i-1) == s1.charAt(j-1)) {
-			path(s1, s2, strg, i-1, j-1, psf + s1.charAt(i-1));
-		}
-	}
+	
+//	public static void path(String s1,String s2,int[][] strg,int i,int j,String psf) {
+//		
+//		if(s1.charAt(i-1) == s1.charAt(j-1)) {
+//			path(s1, s2, strg, i-1, j-1, psf + s1.charAt(i-1));
+//		}
+//	}
+//	
 }
 
